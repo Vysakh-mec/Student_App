@@ -1,39 +1,58 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useRef, useState } from 'react'
-import Checkbox from 'expo-checkbox'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Color from '../constants/Color'
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import CheckBoxActiveIcon from "../../assets/icons/CheckBoxActiveIcon.svg"
+import CheckBoxInActiveIcon from "../../assets/icons/CheckBoxInActiveIcon.svg"
 
-const SingleStudentList = ({userDetails}) => {
+
+const SingleStudentList = ({ userDetails, isChecked, handleBottomSheet , handleCheckBox }) => {
 
   const [expanded, setExpanded] = useState(false)
+  const [checked, setChecked] = useState(isChecked)
+  useEffect(() => {
+    setChecked(isChecked)
+  },[isChecked])
 
-  let Guardians = []
-  Guardians = userDetails.GuardianInformation  
-  
+
   return (
-    <TouchableOpacity activeOpacity={0.9} onPressIn={() => setExpanded(!expanded)} style={styles.container}>
+    <View activeOpacity={0.9} style={styles.container}>
       {/* header */}
       <View style={styles.headerContainer}>
-        <View style={styles.headerLeft}>
+        <TouchableOpacity
+          onPress={() => setExpanded(!expanded)}
+          style={styles.headerLeft}>
           <Image source={{ uri: userDetails.photoURL }} style={styles.headerImage} />
           <Text style={styles.headerText}>{userDetails.name}</Text>
-        </View>
-        <Checkbox />
+        </TouchableOpacity>
+
+
+
+        <TouchableOpacity style={styles.Checkbox} onPress={() => handleCheckBox()}>
+          {
+            checked ?
+              <CheckBoxActiveIcon />
+              :
+              <CheckBoxInActiveIcon />
+          }
+
+        </TouchableOpacity>
       </View>
       {/* body */}
 
       {
         !expanded ?
-          (<View style={styles.bodyContainer}>
+          (<TouchableOpacity
+            onPress={() => setExpanded(!expanded)}
+            style={styles.bodyContainer}>
             <Text style={styles.secondaryText}>
               Classes
             </Text>
             <Text style={styles.primaryText}>{userDetails.Classes}</Text>
-          </View>)
+          </TouchableOpacity>)
           :
 
-          (<View>
+          (<TouchableOpacity activeOpacity={0.5} onPress={() => handleBottomSheet()}>
             <View style={styles.bodyContainer}>
               <View style={styles.miniContainer}>
                 <Text style={styles.secondaryText}>Registration Number</Text>
@@ -53,16 +72,16 @@ const SingleStudentList = ({userDetails}) => {
                 <Text style={styles.secondaryText}>Family members</Text>
                 <View style={styles.imageContainer}>
                   {
-                    Guardians.map((item,index) => 
+                    userDetails.GuardianInformation.map((item, index) =>
                       <Image key={index} source={{ uri: item.PhotoURL }} style={styles.bodyimage} />
                     )
                   }
                 </View>
               </View>
             </View>
-          </View>)
-      }  
-    </TouchableOpacity>
+          </TouchableOpacity>)
+      }
+    </View>
   )
 }
 
@@ -86,16 +105,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginTop:10
+    marginTop: 10
   },
   headerLeft: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10
+    gap: 10,
+    flex: 1
   },
   headerText: {
     fontSize: 16,
-    fontWeight: 600
+    fontFamily:"Montserrat_600"
   },
   headerImage: {
     height: 30,
@@ -112,11 +132,11 @@ const styles = StyleSheet.create({
   secondaryText: {
     color: Color.secondaryText,
     fontSize: 12,
-    fontWeight: 400
+    fontFamily:"Montserrat_400"
   },
   primaryText: {
     fontSize: 14,
-    fontWeight: 500
+    fontFamily:"Montserrat_500"
   },
   imageContainer: {
     flexDirection: "row",

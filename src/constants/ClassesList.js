@@ -1,0 +1,1 @@
+export default ["Arya", "Nila", "Varun", "Prek", "Arun", "Disha", "Vidya", "Raj", "Sneha", "Ravi", "Rhea", "Kiran", "Tejas", "Mira", "Rohan", "Anju", "Aryan", "Sana", "Navya", "Pranav", "Sahil", "Tanya"];
