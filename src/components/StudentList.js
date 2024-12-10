@@ -1,3 +1,4 @@
+import "react-native-gesture-handler"
 import { FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import Color from "../constants/Color"
