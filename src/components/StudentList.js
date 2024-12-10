@@ -103,7 +103,8 @@ const StudentList = ({ searchText, selectedClass }) => {
      }
     )
     setOriginalDatas(updatedData)
-    toggleCheckBox()
+    setCheckedDatas([])
+    setIsChecked(false)
   }
 
   const toggleCheckBox = () => {
@@ -145,11 +146,12 @@ const StudentList = ({ searchText, selectedClass }) => {
 
           </TouchableOpacity>
           {
-            isChecked
-            &&
+            checkedDatas.length
+            ?
             <TouchableOpacity onPress={() => handleDelete()}>
             <DeleteIcon />
             </TouchableOpacity>
+            : null
           }
         </View>
       </View>
