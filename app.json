@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/AppIcon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vysakh.Student_App"
     },
     "web": {
       "favicon": "./assets/AppIcon.png"

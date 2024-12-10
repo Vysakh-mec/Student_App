@@ -12,6 +12,7 @@ import PencilIcon from "../../assets/icons/PencilIcon.svg"
 import CheckBoxActiveIcon from "../../assets/icons/CheckBoxActiveIcon.svg"
 import CheckBoxInActiveIcon from "../../assets/icons/CheckBoxInActiveIcon.svg"
 import DeleteIcon from "../../assets/icons/DeleteIcon.svg"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
 
 
 const StudentList = ({ searchText, selectedClass }) => {
@@ -189,6 +190,8 @@ const StudentList = ({ searchText, selectedClass }) => {
         index={bottomSheetVisible ? 0 : -1}
         onClose={() => setBottomSheetVisible(false)}
       >
+        <GestureHandlerRootView>
+          
         <BottomSheetScrollView>
           {/* <ScrollView> */}
           <View style={styles.BottomSheetHeader}>
@@ -234,6 +237,8 @@ const StudentList = ({ searchText, selectedClass }) => {
           </View>
           {Guardians.map((item, index) => <BottomSheetItem key={index} GuardianDetails={item} />)}
         </BottomSheetScrollView>
+        </GestureHandlerRootView>
+
       </BottomSheet>
 
     </View>
