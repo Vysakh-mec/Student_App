@@ -185,7 +185,6 @@ const StudentList = ({ searchText, selectedClass }) => {
       <BottomSheet
         ref={sheetRef}
         snapPoints={snapPoints}
-        detached
         enablePanDownToClose
         index={bottomSheetVisible ? 0 : -1}
         onClose={() => setBottomSheetVisible(false)}
